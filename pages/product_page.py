@@ -17,5 +17,10 @@ class ProductPage(BasePage):
 		isPriceMatch = self.is_elements_same(*ProductPageLocators.BASKET_PRICE, *ProductPageLocators.PRICE)
 		assert (isPriceMatch and isContainedMessage), "Price of basket and price of good are different!" 
 
-        
+	def should_not_be_success_message(self):
+		assert self.is_not_element_present(*ProductPageLocators.GOOD_IS_ADDED_TO_BASKET_MSG), \
+			"Success message is presented, but should not be"
 
+	def should_not_is_disappeared(self):
+		assert self.is_disappeared(*ProductPageLocators.GOOD_IS_ADDED_TO_BASKET_MSG), \
+			"Success message is disappeared, but should not be"
