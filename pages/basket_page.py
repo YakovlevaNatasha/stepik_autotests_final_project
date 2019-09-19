@@ -17,7 +17,7 @@ class BasketPage(BasePage):
 			assert False, "The basket is not empty or you should select another language"
 
 	def should_be_goods_in_basket(self):
-		assert not self.is_not_element_present(*BasketPageLocators.CONTAINER_OF_GOODS), "Basket is empty, but shouldn't be"
+		assert self.is_element_present(*BasketPageLocators.CONTAINER_OF_GOODS), "Basket is empty, but shouldn't be"
 
 
 	def should_not_be_goods_in_basket(self):

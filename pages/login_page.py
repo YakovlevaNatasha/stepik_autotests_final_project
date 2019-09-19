@@ -1,7 +1,5 @@
 from .base_page import BasePage
 from .locators import LoginPageLocators
-from selenium.webdriver.common.by import By
-
 
 class LoginPage(BasePage):
     def should_be_login_page(self):
@@ -10,7 +8,6 @@ class LoginPage(BasePage):
         self.should_be_register_form()
 
     def should_be_login_url(self):
-        # реализуйте проверку на корректный url адрес
         assert self.browser.current_url.find('login'), 'Uncorrect url! "Login" not contained in link'
      
     def should_be_login_form(self):

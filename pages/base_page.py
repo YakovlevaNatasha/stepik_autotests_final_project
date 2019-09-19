@@ -1,5 +1,5 @@
 from selenium.common.exceptions import NoSuchElementException
-from selenium.common.exceptions import NoAlertPresentException # в начале файла
+from selenium.common.exceptions import NoAlertPresentException 
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -16,15 +16,18 @@ class BasePage():
 	def open(self):
 		self.browser.get(self.url)
 
+	def get_element(self, how, what):
+		return self.browser.find_element(how, what)
+
+	def get_text_of_element(self, how, what):
+		return self.get_element(how, what).text
+
 	def go_to_login_page(self):
-		link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
+		link = self.get_element(*BasePageLocators.LOGIN_LINK)
 		link.click()
 
-	def should_be_login_link(self):
-		assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
-
 	def go_to_basket_page(self):
-		link = self.browser.find_element(*BasePageLocators.BASKET_LINK)
+		link = self.get_element(*BasePageLocators.BASKET_LINK)
 		link.click()
 
 	def is_element_present(self, how, what):
@@ -49,6 +52,19 @@ class BasePage():
 			return False
 		return True
 
+	def is_elements_same(self, how_el1, what_el1, how_el2, what_el2):
+		firstElement = self.get_text_of_element(how_el1, what_el1)
+		secondElement = self.get_text_of_element(how_el2, what_el2)
+		return True if firstElement==secondElement else False
+
+	def should_be_login_link(self):
+		assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
+
+
+	def should_be_authorized_user(self):
+		assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented, probably unauthorised user"
+
+
 	def solve_quiz_and_get_code(self):
 		alert = self.browser.switch_to.alert
 		x = alert.text.split(" ")[2]
@@ -62,17 +78,3 @@ class BasePage():
 			alert.accept()
 		except NoAlertPresentException:
 			print("No second alert presented")
-
-	def get_element(self, how, what):
-		return self.browser.find_element(how, what)
-
-	def get_text_of_element(self, how, what):
-		return self.get_element(how, what).text
-
-	def is_elements_same(self, how_el1, what_el1, how_el2, what_el2):
-		firstElement = self.get_text_of_element(how_el1, what_el1)
-		secondElement = self.get_text_of_element(how_el2, what_el2)
-		return (True if (firstElement == secondElement) else False)
-
-	def should_be_authorized_user(self):
-		assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented, probably unauthorised user"

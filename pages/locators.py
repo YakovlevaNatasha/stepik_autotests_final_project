@@ -1,7 +1,6 @@
 from selenium.webdriver.common.by import By
 
 class BasketPageLocators():
-	#EMPTY_BUTTON_MSG = (By.XPATH, "//p[contains(text(),")
 	EMPTY_BASKET_MSG = (By.CSS_SELECTOR, "#content_inner p")
 	CONTAINER_OF_GOODS = (By.CSS_SELECTOR, ".basket_items")
 
@@ -11,10 +10,8 @@ class BasePageLocators():
 	BASKET_LINK = (By.CSS_SELECTOR, '.btn-group .btn.btn-default:nth-child(1)')
 	USER_ICON = (By.CSS_SELECTOR, ".icon-user")
 
-
 class MainPageLocators():
 	LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
-
 
 class LoginPageLocators():
 	LOGIN_FORM = (By.CSS_SELECTOR, "#login_form")

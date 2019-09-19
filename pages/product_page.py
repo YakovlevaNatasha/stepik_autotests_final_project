@@ -10,7 +10,6 @@ class ProductPage(BasePage):
 		isContainedMessage = self.is_element_present(*ProductPageLocators.GOOD_IS_ADDED_TO_BASKET_MSG)
 		isCorrectNameOfGood = self.is_elements_same(*ProductPageLocators.NAME_OF_GOOD, *ProductPageLocators.NAME_FROM_MESSAGE)
 		assert (isContainedMessage and isCorrectNameOfGood), "Message about success adding of good in basket is not contained at this page or name of good is wrong"
-	
 
 	def should_be_message_with_basket_price(self):
 		isContainedMessage = self.is_element_present(*ProductPageLocators.MESSAGE_WITH_BASKET_PRICE)
